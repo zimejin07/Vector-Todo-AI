@@ -1,4 +1,4 @@
-# Vector Todo AI
+# Semantic Todo Engine
 
 This repository is the starting point for building a **semantic todo system** that treats tasks as meaning, not strings.
 
@@ -51,12 +51,19 @@ Build a todo system where:
 
 ---
 
-## Design Constraints
+## Mandatory Intelligence Loop
 
-- Minimal surface area
-- Clear data flow: text → embedding → vector → retrieval
-- Pluggable components
-- Bias toward understanding over polish
+Every intelligent action follows this pipeline:
+
+User intent (natural language)
+
+Embedding-based retrieval (vector DB)
+
+Context assembly
+
+LLM reasoning constrained to retrieved context
+
+Structured output (not prose when possible)
 
 ---
 
@@ -78,6 +85,77 @@ These questions are intentionally left open and will be answered through impleme
 - [ ] Suggested todos based on existing ones
 - [ ] Time-aware relevance decay
 - [ ] Hybrid vector + keyword retrieval
+
+
+## Updated Capabilities (LLM-Required)
+#1. Semantic Search (LLM-Interpreted)
+
+Retrieval finds candidates
+
+LLM explains why they match
+
+LLM can re-rank or filter
+
+Example:
+
+“Find tasks that are probably blockers”
+
+LLM interprets “blocker” using retrieved tasks only.
+
+# 2. Dynamic Grouping (LLM-Synthesized)
+
+Vector clustering proposes groups
+
+LLM names and explains clusters
+
+Clusters are ephemeral, not stored
+
+# 3. Intent-Aware Prioritization
+
+LLM answers:
+
+“What should I work on next?”
+
+“What has been lingering too long?”
+
+“What is urgent but not explicit?”
+
+LLM reasoning is bounded by:
+
+task content
+
+timestamps
+
+status
+
+### 4. Meta-Reasoning Over Tasks
+
+LLM can:
+
+Summarize current workload
+
+Detect avoidance patterns
+
+Identify scope creep or overload
+
+Generate reflective insights
+
+This is where learning happens.
+
+Revised Architecture (Still Minimal)
+
+User Intent
+   ↓
+Embed Query
+   ↓
+Vector Retrieval (Qdrant)
+   ↓
+Context Window Assembly
+   ↓
+LLM Reasoning (OpenAI)
+   ↓
+Structured Result
+
 
 ---
 
